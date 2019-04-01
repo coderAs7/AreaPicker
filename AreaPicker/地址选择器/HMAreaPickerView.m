@@ -71,6 +71,16 @@ static const CGFloat animationDuration = 0.3;
     }];
 }
 - (void)innerShowInView:(UIView *)view andCompleteBlock:(void (^)(void))completion{
+    
+    CGRect bounds = [UIScreen mainScreen].bounds;
+    
+    self.frame = bounds;
+    self.coverButton.frame = bounds;
+    
+    _topView.frame = CGRectMake(0, bounds.size.height, bounds.size.width, topViewHeight);
+    
+    _pickView.frame = CGRectMake(0, CGRectGetMaxY(_topView.frame), bounds.size.width, _pickViewFrame.size.height);
+    
     _provinceSelectedRow = _provinceSelectedRowOutSide;
     _citySelectedRow = _citySelectedRowOutSide;
     _areaSelectedRow = _areaSelectedRowOutSide;
@@ -86,14 +96,7 @@ static const CGFloat animationDuration = 0.3;
     self.coverButton.userInteractionEnabled = NO;
     self.pickView.userInteractionEnabled = NO;
     
-    CGRect bounds = [UIScreen mainScreen].bounds;
-    
-    self.frame = bounds;
-    self.coverButton.frame = bounds;
-    
-    _topView.frame = CGRectMake(0, bounds.size.height, bounds.size.width, topViewHeight);
-    
-    _pickView.frame = CGRectMake(0, CGRectGetMaxY(_topView.frame), bounds.size.width, _pickViewFrame.size.height);
+
     
     [view addSubview:self];
     [UIView animateWithDuration:animationDuration animations:^{
